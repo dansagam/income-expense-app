@@ -1,11 +1,42 @@
 .App {
-  text-align: center;
+    font-size: 16px; 
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    font-weight: 400;
+}
+.display-topper{
+    width: 100%;
+    height: 40vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(./image/budget-training.jpg);
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.income-expense-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+    width: 400px;
+    color: #fff;
+
+}
+.header-text-div .header-text{
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+.income-expense-display{
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 
