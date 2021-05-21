@@ -5,7 +5,9 @@ import TopIncomeExpenseTop from './components/TopIncomeExpenseTop';
 function App() {
   return (
     <div className="App">
-        <TopIncomeExpenseTop />
+        <div className="display-topper">
+            <TopIncomeExpenseTop />
+        </div>
     </div>
   );
 }
