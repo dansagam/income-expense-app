@@ -18,12 +18,14 @@
 
 }
 .income-expense-details {
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;  
+    align-self: flex-end;
     width: 400px;
     color: #fff;
+    margin-bottom: 25px;
 
 }
 .header-text-div .header-text{
@@ -37,6 +39,41 @@
     letter-spacing: 2px;
     text-align: center;
 }
+.income-stack-display, .expense-stack-display{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px;
+    margin-top: 5px;
+    text-transform: uppercase;
+    text-align: left;
+}
+.total-expense-amount-field, .total-income-amount-field{
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-transform: uppercase; */
+    display: grid;
+    grid-template-columns: 80% 20%;
+    padding: 0 .4rem;
+}
+.income-stack-display{
+    margin-bottom: 5px;
+    background-color: #28B9B5;
 
+}
+.expense-stack-display{
+    background-color: #FF5049;
+    margin-bottom: 10px;
 
+}
+.income-amount-percentage, .expense-amount-percentage{
+    font-size: 11px;
+    padding: 3px 0;
+    margin-left: 5px;
+    width: 22px;
+}
+.expense-amount-percentage{
+    background-color: rgba(255, 255, 255, 0.2);
+}
 
