@@ -1,11 +1,11 @@
 
 import './App.css';
-import ExpenseIncomeDisplay from './components/ExpenseIncomeDisplay';
+import TopIncomeExpenseTop from './components/TopIncomeExpenseTop';
 
 function App() {
   return (
     <div className="App">
-        <ExpenseIncomeDisplay />
+        <TopIncomeExpenseTop />
     </div>
   );
 }
