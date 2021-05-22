@@ -7,8 +7,8 @@ const IncomeExpenseInputPanel = () => {
                 <option value="income">Income</option>
                 <option value="expense">Expense</option>
             </select>
-            <input type="text" />
-            <input type="number" />
+            <input className="detail-input-text" type="text" />
+            <input type="number" className="input-detail-value" />
         </>
     )
 }

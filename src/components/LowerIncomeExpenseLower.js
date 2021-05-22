@@ -4,7 +4,7 @@ import IncomeExpenseInputPanel from './IncomeExpenseInputPanel'
 const LowerIncomeExpenseLower = () => {
     return (
         <div>
-            <div>
+            <div className="input-income-expense-field">
                 <IncomeExpenseInputPanel />
             </div>
             <div className="income-expense-list-field">
