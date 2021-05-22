@@ -76,4 +76,39 @@
 .expense-amount-percentage{
     background-color: rgba(255, 255, 255, 0.2);
 }
+.input-income-expense-field{
+    padding: 20px;
+    background-color: #f7f7f7;
+    letter-spacing: 1.2rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.input-container{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: center;
+    width: 640px;
 
+}
+#income-expense-option{
+    padding: 10px 5px;
+    margin: 0 5px;
+    letter-spacing: .2rem;
+}
+.detail-input-text{
+    padding: 10px 5px;
+    margin: 0 5px;
+    letter-spacing: .2rem;
+    width: 540px;
+    border-radius: 5px;
+    color: rgb(124, 123, 124);
+}
+.input-detail-value{
+    padding: 10px 5px;
+    margin: 0 5px;    
+    letter-spacing: .2rem;
+    width: 80px;
+}
