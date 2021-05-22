@@ -1,5 +1,6 @@
 
 import './App.css';
+import LowerIncomeExpenseLower from './components/LowerIncomeExpenseLower';
 import TopIncomeExpenseTop from './components/TopIncomeExpenseTop';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
         <div className="display-topper">
             <TopIncomeExpenseTop />
         </div>
+        <LowerIncomeExpenseLower />
     </div>
   );
 }
