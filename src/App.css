@@ -112,3 +112,55 @@
     letter-spacing: .2rem;
     width: 80px;
 }
+.income-expense-list-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: center;
+    padding: 15px 50px;
+}
+.income-side-detail, .expense-side-detail {
+    margin-top: 40px ;
+    width: 40%;
+}
+h2.income-header, h2.expense-header {
+    line-height: 1.5rem;
+    padding: 15px;
+    font-size: 2.1rem;
+    font-weight: 400;
+    border-bottom: 1px solid #28B9B5;
+}
+.income-list-container, .expense-list-container{
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 15px;
+}
+.item-field {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 8px;
+}
+.item-value-container {
+    /* display: flex;
+    flex-direction: row; */
+    width: 40%;
+    display: grid;
+    grid-template-columns: 70% 40%;
+    padding: 2px 5px;
+}
+/* .remove-button {
+    visibility: hidden;
+} */
+.show-delete{
+    display: inline;
+    visibility: visible;
+}
+
+
+
+
+
