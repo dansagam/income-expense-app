@@ -5,11 +5,11 @@ import IncomeReducer from './IncomeReducer'
 
 const initialState ={
     incomeTransactions: [
-        {id: 1, incomeDetail: 'book', incomeAmount: 5000},
-        {id: 2, incomeDetail: 'sex', incomeAmount: 6000}
+        {id: 1, textDetail: 'book', Amount: 5000},
+        {id: 2, textDetail: 'sex', Amount: 6000}
     ],
     expenseTransactions : [
-        {id: 1, expenseDetail: 'porn', expenseAmount: 4000}
+        {id: 1,  textDetail: 'porn', Amount: 4000}
     ]
 }
 
