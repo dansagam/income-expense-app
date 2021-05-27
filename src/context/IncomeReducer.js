@@ -2,12 +2,18 @@
 const IncomeReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_EXPENSE_TRANSACTION':
-            return ;
+            return {
+                ...state,
+                incomeTransactions: [action.payload, ...state.incomeTransactions]
+            }
         case 'DELETE_INCOME_TRANSACTION':
-            return
+            return {
+                ...state,
+                incomeTransactions: state.incomeTransactions.filter(incomeTransaction => incomeTransaction.id !== action.payload)
+            }
     
         default:
-            return;
+            return state
     }
 }
 
