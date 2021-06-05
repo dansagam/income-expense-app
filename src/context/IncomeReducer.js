@@ -1,7 +1,7 @@
 
 const IncomeReducer = (state, action) => {
     switch (action.type) {
-        case 'ADD_EXPENSE_TRANSACTION':
+        case 'ADD_INCOME_TRANSACTION':
             return {
                 ...state,
                 incomeTransactions: [action.payload, ...state.incomeTransactions]
