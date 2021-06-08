@@ -1,9 +1,11 @@
-import React,{useContext} from 'react'
+import {useContext} from 'react'
 import IncomeExpenseInputPanel from './IncomeExpenseInputPanel'
 import { GlobalContext } from '../context/IEGlobalState'
+import IncomeList from './IncomeList'
+import ExpenseList from './ExpenseList'
 
 const LowerIncomeExpenseLower = () => {
-    const {expenseTransactions} = useContext(GlobalContext)
+    const {expenseTransactions, incomeTransactions} = useContext(GlobalContext)
     
     return (
         <div className="lower-container">
@@ -14,34 +16,17 @@ const LowerIncomeExpenseLower = () => {
                 <div className="income-side-detail">
                     <h2 className="income-header">Income</h2>
                     <div className="income-list-container">
-                        <div className="item-field" id="div_0">
-                            <div className="item-description">descriiption</div>
-                            <div className="item-value-container">
-                                <div className="item-value">2342</div>
-                                <div className="delete-edit-button">
-                                    <button><span>edit</span></button>
-                                    {console.log(expenseTransactions)}
-                                    <button className="remove-button"><span>delete</span></button>
-                                </div>
-                            </div>
-                        </div>
+                        {incomeTransactions.map(incomeTransaction =>(
+                            <IncomeList key={incomeTransaction.id} incomeTransaction={incomeTransaction} />
+                        ))}
                     </div>
                 </div>
                 <div className="expense-side-detail">
                     <h2 className="expense-header">Expense</h2>
                     <div className="expense-list-container">
-                        <div className="item-field" id="div_0">
-                            <div className="item-description">descriiption</div>
-                            <div className="item-value-container">
-                                <div className="item-value">2342</div>
-                                <div className="delete-edit-button">
-                                    <button><span>edit</span></button>
-                                    <button className="remove-button"><span>delete</span></button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        
+                        {expenseTransactions.map(expenseTransaction => (
+                            <ExpenseList key={expenseTransaction.id} expenseTransaction = {expenseTransaction} />
+                        ))}
                     </div>
                 </div>
             </div>
