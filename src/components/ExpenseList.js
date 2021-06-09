@@ -1,18 +1,15 @@
 import {useContext} from 'react'
 import { GlobalContext } from '../context/IEGlobalState'
+import Expense from './Expense'
 
-const ExpenseList = (props) => {
-    const {deleteExpenseTransaction} = useContext(GlobalContext)
+const ExpenseList = () => {
+    const {expenseTransactions} = useContext(GlobalContext)
     return (
-        <div className="item-field" id="div_0">
-            <div className="item-description">{props.expenseTransaction.description}</div>
-            <div className="item-value-container">
-                <div className="item-value">{props.expenseTransaction.amount}</div>
-                <div className="delete-edit-button">
-                    <button><span>edit</span></button>
-                    <button className="remove-button" onClick={()=> deleteExpenseTransaction(props.expenseTransaction.id)}><span>delete</span></button> 
-                </div>
-            </div>
+        <div className="expense-list-container">
+            {console.log(expenseTransactions)}
+            {expenseTransactions.map(expenseTransaction => (
+                <Expense key={expenseTransaction.id} expenseTransaction ={expenseTransaction} />
+            ))}
         </div>
     )
 }

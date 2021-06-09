@@ -6,13 +6,12 @@ import IncomeReducer from './IncomeReducer'
 const initialState ={
     incomeTransactions: [
         {id: 1, description: 'book', amount: 5000},
-        {id: 2, description: 'sex', amount: 6000}
+        {id: 2, description: 'Music', amount: 6000}
     ],
     expenseTransactions : [
-        {id: 1,  description: 'porn', amount: 4000}
+        {id: 1,  description: 'john doe', amount: 4000}
     ]
 }
-console.log(initialState)
 export const GlobalContext = createContext(initialState)
 export const GlobalIncomeProvider = ({children}) => {
     const [incomeState, dispatchIncome] = useReducer(IncomeReducer, initialState);
@@ -22,7 +21,7 @@ export const GlobalIncomeProvider = ({children}) => {
             type: 'ADD_INCOME_TRANSACTION',
             payload: incomeTransaction
         })
-        console.log(incomeTransaction)
+        // console.log(incomeTransaction)
     }
     const deleteIncomeTransaction = (id) =>{
         dispatchIncome({

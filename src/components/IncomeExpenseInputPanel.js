@@ -4,7 +4,7 @@ import { GlobalContext } from '../context/IEGlobalState'
 const IncomeExpenseInputPanel = () => {
     const {addIncomeTransaction} = useContext(GlobalContext)
     const {addExpenseTransaction} = useContext(GlobalContext)
-    const   [optValue, setOptValue] = useState(''),
+    const   [optValue, setOptValue] = useState('income'),
             [description, setDecription] = useState(''),
             [amount, setAmount] = useState(0)
     const onSubmit = (e) => {
