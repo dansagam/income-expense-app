@@ -24,6 +24,16 @@ export const GlobalIncomeProvider = ({children}) => {
         })
         // console.log(incomeTransaction)
     }
+    const editIncomeTransaction = (incomeTransaction)=> {
+        dispatchIncome({
+            type: 'EDIT_INCOME_TRANSACTION'
+        })
+    }
+    const editExpenseTransaction = (incomeTransaction)=> {
+        dispatchIncome({
+            type: 'EDIT_EXPENSE_TRANSACTION'
+        })
+    }
     const deleteIncomeTransaction = (id) =>{
         dispatchIncome({
             type: 'DELETE_INCOME_TRANSACTION',
@@ -47,6 +57,7 @@ export const GlobalIncomeProvider = ({children}) => {
         {incomeTransactions: incomeState.incomeTransactions, 
             expenseTransactions: expenseState.expenseTransactions,
             deleteIncomeTransaction, addIncomeTransaction,
+            editIncomeTransaction, editExpenseTransaction,
             addExpenseTransaction, deleteExpenseTransaction
         }
     }>
