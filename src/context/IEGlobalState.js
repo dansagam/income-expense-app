@@ -9,7 +9,8 @@ const initialState ={
         {id: 2, description: 'Music', amount: 6000}
     ],
     expenseTransactions : [
-        {id: 1,  description: 'john doe', amount: 4000}
+        {id: 1,  description: 'john doe', amount: 4000},
+        {id: 2,  description: 'john doe', amount: 4000}
     ]
 }
 export const GlobalContext = createContext(initialState)
