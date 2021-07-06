@@ -1,4 +1,6 @@
 import {useContext} from 'react'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { GlobalContext } from '../context/IEGlobalState'
 
 const Income = (props) => {
@@ -9,8 +11,10 @@ const Income = (props) => {
             <div className="item-value-container">
                 <div className="item-value">{props.incomeTransaction.amount}</div>
                 <div className="delete-edit-button">
-                    <button><span>edit</span></button>
-                    <button className="remove-button" onClick={()=> deleteIncomeTransaction(props.incomeTransaction.id)}><span>delete</span></button>
+                    <span><FontAwesomeIcon  icon=/**"fa-solid fa-square-pen"*/{faEdit} /></span>
+                    <span className="remove-button" onClick={()=> deleteIncomeTransaction(props.incomeTransaction.id)}>
+                        <FontAwesomeIcon icon={faTrash} />
+                    </span>
                 </div>
             </div>
         </div>
