@@ -6,7 +6,6 @@ const IncomeList = () => {
     const {incomeTransactions} = useContext(GlobalContext)
     return (
         <div className="income-list-container">
-            {console.log(incomeTransactions)}
             {incomeTransactions.map(incomeTransaction =>(
                 <Income key={incomeTransaction.id} incomeTransaction={incomeTransaction} />
             ))}
