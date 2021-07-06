@@ -159,7 +159,10 @@ h2.income-header, h2.expense-header {
     display: inline;
     visibility: visible;
 }
-
+.delete-edit-button{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
 
 
 
