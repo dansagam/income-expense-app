@@ -21,7 +21,13 @@ const IncomeReducer = (state, action) => {
             return {
                 ...state,
                 incomeTransactions: [...state.incomeTransactions],
-                // status: false
+                status: false
+            }
+        
+        case 'INCOME_EDIT_STATUS':
+            return {
+                ...state,
+                status: action.payload
             }
         default:
             return state

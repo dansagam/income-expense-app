@@ -1,5 +1,7 @@
 
 const ExpenseReducer = (state, action) => {
+    console.log(action.payload)
+    // console.log(state)
     switch (action.type) {
         case 'ADD_EXPENSE_TRANSACTION':
             return {
@@ -21,7 +23,13 @@ const ExpenseReducer = (state, action) => {
             return {
                 ...state,
                 expenseTransactions: [...state.expenseTransactions],
-                // status: false
+                status: false
+            }
+        case 'EXPENSE_EDIT_STATUS':
+            console.log(action.payload)
+            return {
+                ...state,
+                status: action.payload
             }
         default:
             return state

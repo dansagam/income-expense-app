@@ -14,7 +14,6 @@ const IncomeExpenseInputPanel = () => {
             description,
             amount: +amount
         }
-        console.log(newTransaction)
         if(optValue === 'income') {
             addIncomeTransaction(newTransaction)
         }

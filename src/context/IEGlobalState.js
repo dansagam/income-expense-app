@@ -15,10 +15,13 @@ const initialState ={
     loading: false,
     status: false
 }
+
 export const GlobalContext = createContext(initialState)
 export const GlobalIncomeProvider = ({children}) => {
     const [incomeState, dispatchIncome] = useReducer(IncomeReducer, initialState);
     const [expenseState, dispatchExpense] = useReducer(ExpenseReducer, initialState);
+    // console.log(incomeState)
+    // console.log(expenseState)
     const addIncomeTransaction = (incomeTransaction) => {
         dispatchIncome({
             type: 'ADD_INCOME_TRANSACTION',
@@ -33,7 +36,8 @@ export const GlobalIncomeProvider = ({children}) => {
         })
     }
     const editExpenseTransaction = (newExpenseTransaction)=> {
-        dispatchIncome({
+        console.log(newExpenseTransaction)
+        dispatchExpense({
             type: 'EDIT_EXPENSE_TRANSACTION',
             payload: newExpenseTransaction
         })
@@ -56,11 +60,26 @@ export const GlobalIncomeProvider = ({children}) => {
             payload: id
         })
     }
+    const updateExpenseStatus = (newStatus) =>{
+        dispatchExpense({
+            type: 'EXPENSE_EDIT_STATUS',
+            payload: newStatus
+
+        })
+    }
+    const updateIncomeStatus = (newStatus) =>{
+        dispatchIncome({
+            type: 'INCOME_EDIT_STATUS',
+            payload: newStatus
+
+        })
+    }
 
     return <GlobalContext.Provider value={
         {incomeTransactions: incomeState.incomeTransactions, 
             expenseTransactions: expenseState.expenseTransactions,
-            status: incomeState.status,
+            incomeStatus: incomeState.status,
+            expenseStatus: expenseState.status, updateIncomeStatus, updateExpenseStatus,
             deleteIncomeTransaction, addIncomeTransaction,
             editIncomeTransaction, editExpenseTransaction,
             addExpenseTransaction, deleteExpenseTransaction
