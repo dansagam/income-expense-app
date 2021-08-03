@@ -11,7 +11,18 @@ const IncomeReducer = (state, action) => {
                 ...state,
                 incomeTransactions: state.incomeTransactions.filter(incomeTransaction => incomeTransaction.id !== action.payload)
             }
-    
+        case 'EDIT_INCOME_TRANSACTION':
+            const { id, description, amount} = action.payload
+            const existingIncome = state.incomeTransactions.find((incomeTransaction) => incomeTransaction.id === id)
+            if(existingIncome) {
+               existingIncome.text = description
+               existingIncome.amount = amount
+            }
+            return {
+                ...state,
+                incomeTransactions: [...state.incomeTransactions],
+                // status: false
+            }
         default:
             return state
     }

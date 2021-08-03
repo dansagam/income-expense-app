@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext,  /** useMemo*/ useReducer } from 'react'
 import ExpenseReducer from './ExpenseReducer'
 import IncomeReducer from './IncomeReducer'
 
@@ -11,7 +11,9 @@ const initialState ={
     expenseTransactions : [
         {id: 1,  description: 'john doe', amount: 4000},
         {id: 2,  description: 'john doe', amount: 4000}
-    ]
+    ],
+    loading: false,
+    status: false
 }
 export const GlobalContext = createContext(initialState)
 export const GlobalIncomeProvider = ({children}) => {
@@ -24,14 +26,16 @@ export const GlobalIncomeProvider = ({children}) => {
         })
         // console.log(incomeTransaction)
     }
-    const editIncomeTransaction = (incomeTransaction)=> {
+    const editIncomeTransaction = (newIncomeTransaction)=> {
         dispatchIncome({
-            type: 'EDIT_INCOME_TRANSACTION'
+            type: 'EDIT_INCOME_TRANSACTION',
+            payload: newIncomeTransaction
         })
     }
-    const editExpenseTransaction = (incomeTransaction)=> {
+    const editExpenseTransaction = (newExpenseTransaction)=> {
         dispatchIncome({
-            type: 'EDIT_EXPENSE_TRANSACTION'
+            type: 'EDIT_EXPENSE_TRANSACTION',
+            payload: newExpenseTransaction
         })
     }
     const deleteIncomeTransaction = (id) =>{
@@ -56,6 +60,7 @@ export const GlobalIncomeProvider = ({children}) => {
     return <GlobalContext.Provider value={
         {incomeTransactions: incomeState.incomeTransactions, 
             expenseTransactions: expenseState.expenseTransactions,
+            status: incomeState.status,
             deleteIncomeTransaction, addIncomeTransaction,
             editIncomeTransaction, editExpenseTransaction,
             addExpenseTransaction, deleteExpenseTransaction
