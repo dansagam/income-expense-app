@@ -1,9 +1,13 @@
-import {useContext} from 'react'
-import { GlobalContext } from '../context/IEGlobalState'
+// import {useContext} from 'react'
+// import { GlobalContext } from '../context/IEGlobalState'
 import ExpenseIncomeDisplay from './ExpenseIncomeDisplay'
+import { useSelector} from 'react-redux'
+import { expenseSelectState } from '../context/ExpenseReducer'
+import { incomeSelectState } from '../context/IncomeReducer'
 
 const TopIncomeExpenseTop = () => {
-    const {expenseTransactions, incomeTransactions} = useContext(GlobalContext)
+    const expenseTransactions = useSelector(expenseSelectState)
+    const incomeTransactions = useSelector(incomeSelectState)
     const iteratedAmount = incomeTransactions.map(incomeTransaction =>(incomeTransaction.amount))
     const totalIncome = iteratedAmount.reduce((acc, item) => (acc +=item), 0).toFixed(2)
     const totalExpenseAmount = expenseTransactions.map(expenseTransaction => (expenseTransaction.amount))

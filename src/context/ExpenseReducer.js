@@ -33,11 +33,11 @@ export const ExpenseReducer =createSlice({
                existingExpense.text = description
                existingExpense.amount = amount
             }
-            return {
-                ...state,
-                expenseTransactions: [...state.expenseTransactions],
-                status: false
-            }
+            // return {
+            //     ...state,
+            //     expenseTransactions: [...state.expenseTransactions],
+            //     status: false
+            // }
         },
         expenseEditStatus: (state, action) =>{
             return {

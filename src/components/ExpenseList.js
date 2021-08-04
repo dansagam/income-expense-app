@@ -1,10 +1,12 @@
-import {useContext, useState} from 'react'
-import { GlobalContext } from '../context/IEGlobalState'
+import {useState} from 'react'
+import { useSelector } from 'react-redux'
+import { expenseSelectState } from '../context/ExpenseReducer'
 import EditExpenseForm from './EditExpenseForm'
 import Expense from './Expense'
 
 const ExpenseList = () => {
-    const {expenseTransactions, expenseStatus} = useContext(GlobalContext)
+    const expenseTransactions = useSelector(expenseSelectState)
+    const expenseStatus = useSelector(state => state.Expense.status)
     const [targetid, setTargetid] = useState('')
     return (
         <div className="expense-list-container">

@@ -1,18 +1,17 @@
-import {useContext} from 'react'
-import { GlobalContext } from '../context/IEGlobalState'
+
+import { useSelector } from 'react-redux'
+import { expenseSelectState } from '../context/ExpenseReducer'
+import { incomeSelectState } from '../context/IncomeReducer'
 
 const ExpenseDisplay = () => {
-    const {expenseTransactions, incomeTransactions} = useContext(GlobalContext)
+    const expenseTransactions = useSelector(expenseSelectState)
+    const incomeTransactions = useSelector(incomeSelectState)
     const iteratedAmount = incomeTransactions.map(incomeTransaction => incomeTransaction.amount)
     const totalIncome = iteratedAmount.reduce((acc, item) => (acc +=item), 0).toFixed(2)
     const totalExpenseAmount = expenseTransactions.map(expenseTransaction => expenseTransaction.amount)
     const totalExpense = totalExpenseAmount.reduce((acc, item) => (acc += item), 0).toFixed(2)
     const transactionPercetage = ((Number(totalExpense)/(Number(totalExpense) + Number(totalIncome))) *100).toFixed(2)
         
-    // function valueCal(firstValue, nextVal){
-        
-    //     return firstValue + Number(nextVal) 
-    // }
     return (
         <div className="expense-stack-display">
             <div className="expense-label">Expense</div>
