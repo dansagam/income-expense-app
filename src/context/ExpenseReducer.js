@@ -1,19 +1,32 @@
+import {createSlice} from '@reduxjs/toolkit'
 
-const ExpenseReducer = (state, action) => {
-    console.log(action.payload)
-    // console.log(state)
-    switch (action.type) {
-        case 'ADD_EXPENSE_TRANSACTION':
+
+export const ExpenseReducer =createSlice({
+    name: 'Expense',
+    initialState: {
+        expenseTransactions : [
+            {id: 1,  description: 'john doe', amount: 4000},
+            {id: 2,  description: 'john doe', amount: 4000}
+        ],
+        status: false,
+        loading: false,
+
+    },
+    reducers: {
+        addExpenseTransaction: (state, action) => {
             return {
                 ...state,
                 expenseTransactions: [action.payload, ...state.expenseTransactions]
             }
-        case 'DELETE_EXPENSE_TRANSACTION':
+        },
+        deleteExpenseTransaction: (state, action) => {
             return {
                 ...state,
                 expenseTransactions: state.expenseTransactions.filter(expenseTransaction => expenseTransaction.id !==action.payload)
             }
-        case 'EDIT_EXPENSE_TRANSACTION':
+
+        },
+        editExpenseTransaction: (state, action) =>{
             const { id, description, amount} = action.payload
             const existingExpense = state.expenseTransactions.find((expenseTransaction) => expenseTransaction.id === id)
             if(existingExpense) {
@@ -25,15 +38,23 @@ const ExpenseReducer = (state, action) => {
                 expenseTransactions: [...state.expenseTransactions],
                 status: false
             }
-        case 'EXPENSE_EDIT_STATUS':
-            console.log(action.payload)
+        },
+        expenseEditStatus: (state, action) =>{
             return {
                 ...state,
                 status: action.payload
             }
-        default:
-            return state
-    }
-}
+        }
+    },
+})
 
-export default ExpenseReducer
+export const    {
+                    addExpenseTransaction, 
+                    deleteExpenseTransaction, 
+                    editExpenseTransaction, 
+                    expenseEditStatus
+                } = ExpenseReducer.actions
+
+export const expenseSelectState = state => state.Expense.expenseTransactions
+
+export default ExpenseReducer.reducer
