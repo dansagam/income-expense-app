@@ -3,6 +3,7 @@ import { config } from 'dotenv'
 import connectDB from './config/seedDB.js'
 import morgan from 'morgan'
 import expenseRoutes from './routes/expenseRoutes.js'
+import incomeRoutes from './routes/incomeRoutes'
 
 const app = express()
 
@@ -21,6 +22,7 @@ app.use(express.static('clients/build'))
 }
 
 app.use('/api/expenses', expenseRoutes)
+app.use('/api/incomes', incomeRoutes)
 
 
 const PORT = process.env.PORT || 5000
