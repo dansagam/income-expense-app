@@ -1,14 +1,11 @@
-import React, {useContext} from 'react'
-import { GlobalContext } from '../context/IEGlobalState'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { incomeSelectState } from '../context/IncomeReducer'
 
 const IncomeDisplay = () => {
-    const {incomeTransactions} = useContext(GlobalContext)
+    const incomeTransactions = useSelector(incomeSelectState)
     const iteratedAmount = incomeTransactions.map(incomeTransaction => incomeTransaction.amount)
     const totalIncome = iteratedAmount.reduce((acc, item) => (acc +=item), 0).toFixed(2)
-    // function valueCal(firstValue, nextVal){
-    //     return firstValue.amount + nextVal.amount
-    // }
-
     return (
         <div className="income-stack-display">
             <div className="income-label">Income</div>

@@ -1,10 +1,12 @@
-import {useContext, useState} from 'react'
-import { GlobalContext } from '../context/IEGlobalState'
+import { useState} from 'react'
+import { useSelector } from 'react-redux'
+import { incomeSelectState } from '../context/IncomeReducer'
 import EditIncomeForm from './EditIncomeForm'
 import Income from './Income'
 
 const IncomeList = () => {
-    const {incomeTransactions, incomeStatus} = useContext(GlobalContext)
+    const incomeTransactions = useSelector(incomeSelectState)
+    const incomeStatus = useSelector( (state) => state.Income.status)
     const [targetid, setTargetid] = useState('')
     return (
         <div className="income-list-container">

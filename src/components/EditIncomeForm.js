@@ -1,8 +1,9 @@
-import React, {useContext, useState} from 'react'
-import { GlobalContext } from '../context/IEGlobalState'
+import React, { useState} from 'react'
+import { useDispatch } from 'react-redux'
+import { editIncomeTransaction, incomeEditStatus } from '../context/IncomeReducer'
 
 const EditIncomeForm = (props) => {
-   const { updateIncomeStatus,editIncomeTransaction} = useContext(GlobalContext)
+   const dispatch = useDispatch()
    const [description, setDescription] = useState(props.incomeTransaction.description)
    const [amount, setAmount] = useState(props.incomeTransaction.amount)
    const onSubmit = (e) =>{
@@ -12,8 +13,8 @@ const EditIncomeForm = (props) => {
          description: description,
          amount: Number(+amount)
       }
-      editIncomeTransaction(newUpdate)
-      updateIncomeStatus(false)
+      dispatch(editIncomeTransaction(newUpdate))
+      dispatch(incomeEditStatus(false))
    }
 
    return (

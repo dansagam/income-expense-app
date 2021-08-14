@@ -1,8 +1,9 @@
-import React, {useContext, useState} from 'react'
-import { GlobalContext } from '../context/IEGlobalState'
+import React, { useState} from 'react'
+import { useDispatch,  } from 'react-redux'
+import { expenseEditStatus,editExpenseTransaction } from '../context/ExpenseReducer'
 
 const EditExpenseForm = (props) => {
-   const { updateExpenseStatus,editExpenseTransaction} = useContext(GlobalContext)
+   const dispatch = useDispatch()
    const [description, setDescription] = useState(props.expenseTransaction.description)
    const [amount, setAmount] = useState(props.expenseTransaction.amount)
    const onSubmit = (e) =>{
@@ -12,8 +13,8 @@ const EditExpenseForm = (props) => {
          description: description,
          amount: Number(+amount)
       }
-      editExpenseTransaction(newUpdate)
-      updateExpenseStatus(false)
+      dispatch(editExpenseTransaction(newUpdate))
+      dispatch(expenseEditStatus(false))
    }
 
    return (

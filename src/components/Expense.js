@@ -1,10 +1,11 @@
-import {useContext,} from 'react'
+
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { GlobalContext } from '../context/IEGlobalState'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch } from 'react-redux'
+import { expenseEditStatus, deleteExpenseTransaction } from '../context/ExpenseReducer'
 
 const Expense = (props) => {
-    const {deleteExpenseTransaction, updateExpenseStatus} = useContext(GlobalContext)
+    const dispatch = useDispatch()
     return (
         <div className={`item-field `}  id="div_0">
             <div className="item-description">{props.expenseTransaction.description}</div>
@@ -12,9 +13,9 @@ const Expense = (props) => {
                 <div className="item-value">{props.expenseTransaction.amount}</div>
                 <div className={`delete-edit-button`}>
                     <span onClick={() => {
-                        updateExpenseStatus(true) 
+                        dispatch(expenseEditStatus(true))
                         props.onSetTargetid(props.expenseTransaction.id)}}><FontAwesomeIcon icon={faEdit} /></span>
-                    <span className="remove-button" onClick={()=> deleteExpenseTransaction(props.expenseTransaction.id)}>
+                    <span className="remove-button" onClick={()=> dispatch(deleteExpenseTransaction(props.expenseTransaction.id))}>
                         <FontAwesomeIcon icon={faTrash} />
                     </span>
                 </div>

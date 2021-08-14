@@ -1,9 +1,10 @@
-import React, {useState, useContext} from 'react'
-import { GlobalContext } from '../context/IEGlobalState'
+import React, {useState} from 'react'
+import { useDispatch,} from 'react-redux'
+import { addExpenseTransaction } from '../context/ExpenseReducer'
+import { addIncomeTransaction } from '../context/IncomeReducer'
 
 const IncomeExpenseInputPanel = () => {
-    const {addIncomeTransaction} = useContext(GlobalContext)
-    const {addExpenseTransaction} = useContext(GlobalContext)
+    const dispatch = useDispatch()
     const   [optValue, setOptValue] = useState('income'),
             [description, setDecription] = useState(''),
             [amount, setAmount] = useState(0)
@@ -15,15 +16,11 @@ const IncomeExpenseInputPanel = () => {
             amount: +amount
         }
         if(optValue === 'income') {
-            addIncomeTransaction(newTransaction)
+            dispatch(addIncomeTransaction(newTransaction))
         }
         if (optValue === 'expense'){
-            addExpenseTransaction(newTransaction)
+            dispatch(addExpenseTransaction(newTransaction))
         }
-        // {(optValue = 'expense') ? addExpenseTransaction(newTransaction) 
-        // : (optValue = 'income') ? addIncomeTransaction(newTransaction)
-        
-        // }
         setDecription('')
         
         setAmount('')
