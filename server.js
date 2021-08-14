@@ -3,7 +3,7 @@ import { config } from 'dotenv'
 import connectDB from './config/seedDB.js'
 import morgan from 'morgan'
 import expenseRoutes from './routes/expenseRoutes.js'
-import incomeRoutes from './routes/incomeRoutes'
+import incomeRoutes from './routes/incomeRoutes.js'
 
 const app = express()
 
