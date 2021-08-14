@@ -4,12 +4,12 @@ const router = express.Router()
 
 
 router
-   .router('/')
+   .route('/')
    .get()
    .post()
 
 router
-   .router('/:id')
+   .route('/:id')
    .put()
    .delete()
 
