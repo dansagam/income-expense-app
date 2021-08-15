@@ -80,7 +80,7 @@ export const IncomeReducer = createSlice({
         [deleteIncomeTransaction.fulfilled]: (state, action) =>{
             return {
                 ...state,
-                incomeTransactions: state.incomeTransactions.filter(incomeTransaction => incomeTransaction.id !== action.payload)
+                incomeTransactions: state.incomeTransactions.filter(incomeTransaction => incomeTransaction._id !== action.payload)
             }
         },
         [editIncomeTransaction.fulfilled]: (state, action) =>{

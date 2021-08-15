@@ -7,7 +7,7 @@ import { deleteIncomeTransaction, incomeEditStatus } from '../context/IncomeRedu
 const Income = (props) => {
     const dispatch = useDispatch()
     return (
-        <div className="item-field" key={props.incomeTransaction.id}>
+        <div className="item-field" key={props.incomeTransaction._id}>
             <div className="item-description">{props.incomeTransaction.description}</div>
             <div className="item-value-container">
                 <div className="item-value">{props.incomeTransaction.amount}</div>
@@ -16,9 +16,9 @@ const Income = (props) => {
                         dispatch(incomeEditStatus(true))
                         props.onSetTargetid(props.incomeTransaction._id)}
                         }>
-                            <FontAwesomeIcon  icon=/**"fa-solid fa-square-pen"*/{faEdit} />
+                            <FontAwesomeIcon  icon={faEdit} />
                     </span>
-                    <span className="remove-button" onClick={()=> dispatch(deleteIncomeTransaction(props.incomeTransaction.id))}>
+                    <span className="remove-button" onClick={()=> dispatch(deleteIncomeTransaction(props.incomeTransaction._id))}>
                         <FontAwesomeIcon icon={faTrash} />
                     </span>
                 </div>
