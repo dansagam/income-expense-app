@@ -5,6 +5,7 @@ import axios from 'axios'
 export const getExpenseTransactions = createAsyncThunk('Expense/getExpenseTransactions', async() =>{
     try {
         const response = await axios.get('/api/expenses')
+        console.log(response)
         return response.data.data
     } catch (err) {
         return err.response.data.err
@@ -38,7 +39,7 @@ export const deleteExpenseTransaction = createAsyncThunk('Expense/deleteExpenseT
 
 export const editExpenseTransaction = createAsyncThunk('Expense/editExpenseTransaction', async({_id, description, amount}) =>{
     try {
-        const response = await axios.put(`/api/expenses/${_id}`, {_id, description, amount})
+        const response = await axios.put(`/api/expenses/${_id}`, { description: description, amount: amount})
         return response.data.data
     } catch (err) {
         return err.response.data.err
@@ -54,32 +55,6 @@ export const ExpenseReducer =createSlice({
 
     },
     reducers: {
-        addExpenseTransaction: (state, action) => {
-            return {
-                ...state,
-                expenseTransactions: [action.payload, ...state.expenseTransactions]
-            }
-        },
-        deleteExpenseTransaction: (state, action) => {
-            return {
-                ...state,
-                expenseTransactions: state.expenseTransactions.filter(expenseTransaction => expenseTransaction.id !==action.payload)
-            }
-
-        },
-        editExpenseTransaction: (state, action) =>{
-            const { id, description, amount} = action.payload
-            const existingExpense = state.expenseTransactions.find((expenseTransaction) => expenseTransaction.id === id)
-            if(existingExpense) {
-               existingExpense.text = description
-               existingExpense.amount = amount
-            }
-            // return {
-            //     ...state,
-            //     expenseTransactions: [...state.expenseTransactions],
-            //     status: false
-            // }
-        },
         expenseEditStatus: (state, action) =>{
             return {
                 ...state,
@@ -113,7 +88,7 @@ export const ExpenseReducer =createSlice({
             const { _id, description, amount} = action.payload
             const existingExpense = state.expenseTransactions.find((expenseTransaction) => expenseTransaction._id === _id)
             if(existingExpense) {
-               existingExpense.text = description
+               existingExpense.description = description
                existingExpense.amount = amount
             }
 

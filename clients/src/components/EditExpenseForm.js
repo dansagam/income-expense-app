@@ -9,7 +9,7 @@ const EditExpenseForm = (props) => {
    const onSubmit = (e) =>{
       e.preventDefault()
       const newUpdate ={
-         id: props.expenseTransaction.id,
+         _id: props.expenseTransaction._id,
          description: description,
          amount: Number(+amount)
       }
