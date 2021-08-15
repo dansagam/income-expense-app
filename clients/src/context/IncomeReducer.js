@@ -4,7 +4,6 @@ import axios from 'axios'
 export const getIncomeTransactions = createAsyncThunk('Income/getIncomeTrransactions', async () =>{
     try {
         const response = await axios.get('/api/incomes')
-        console.log(response)
         return response.data.data
     } catch (err) {
         return err.response.data.err
@@ -85,8 +84,8 @@ export const IncomeReducer = createSlice({
             }
         },
         [editIncomeTransaction.fulfilled]: (state, action) =>{
-            const { id, description, amount} = action.payload
-            const existingIncome = state.incomeTransactions.find((incomeTransaction) => incomeTransaction.id === id)
+            const { _id, description, amount} = action.payload
+            const existingIncome = state.incomeTransactions.find((incomeTransaction) => incomeTransaction._id === _id)
             if(existingIncome) {
                existingIncome.description = description
                existingIncome.amount = amount

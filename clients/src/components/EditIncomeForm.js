@@ -9,7 +9,7 @@ const EditIncomeForm = (props) => {
    const onSubmit = (e) =>{
       e.preventDefault()
       const newUpdate ={
-         id: props.incomeTransaction.id,
+         _id: props.incomeTransaction._id,
          description: description,
          amount: Number(+amount)
       }

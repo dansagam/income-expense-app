@@ -14,7 +14,7 @@ const Income = (props) => {
                 <div className="delete-edit-button">
                     <span onClick={() => {
                         dispatch(incomeEditStatus(true))
-                        props.onSetTargetid(props.incomeTransaction.id)}
+                        props.onSetTargetid(props.incomeTransaction._id)}
                         }>
                             <FontAwesomeIcon  icon=/**"fa-solid fa-square-pen"*/{faEdit} />
                     </span>

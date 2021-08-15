@@ -12,12 +12,12 @@ const IncomeList = () => {
         <div className="income-list-container">
             {incomeTransactions.map(incomeTransaction =>(
                 <> { !incomeStatus ?
-                    <Income key={incomeTransaction.id} incomeTransaction={incomeTransaction} onSetTargetid={setTargetid} />
+                    <Income key={incomeTransaction._id} incomeTransaction={incomeTransaction} onSetTargetid={setTargetid} />
                     
-                    : incomeStatus && (targetid === incomeTransaction.id) 
+                    : incomeStatus && (targetid === incomeTransaction._id) 
                     ? <EditIncomeForm incomeTransaction={incomeTransaction} />
                     :
-                    <Income key={incomeTransaction.id} incomeTransaction={incomeTransaction} onSetTargetid={setTargetid} />
+                    <Income key={incomeTransaction._id} incomeTransaction={incomeTransaction} onSetTargetid={setTargetid} />
                 }
                 </>
             ))}
