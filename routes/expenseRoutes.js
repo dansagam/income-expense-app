@@ -1,17 +1,18 @@
 import express from "express";
+import { getExpenses, addExpense, deleteExpense, editExpense } from '../controllers/expenseControllers.js'
 
 const router = express.Router()
 
 
 router
-   .router('/')
-   .get()
-   .post()
+   .route('/')
+   .get(getExpenses)
+   .post(addExpense)
 
 router
-   .router('/:id')
-   .put()
-   .delete()
+   .route('/:id')
+   .put(editExpense)
+   .delete(deleteExpense)
 
 
 

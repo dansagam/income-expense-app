@@ -1,17 +1,18 @@
 import express from "express";
+import { addIncome, deleteIncome, editIncome, getIncomes } from "../controllers/incomeControllers.js";
 
 const router = express.Router()
 
 
 router
-   .router('/')
-   .get()
-   .post()
+   .route('/')
+   .get(getIncomes)
+   .post(addIncome)
 
 router
-   .router('/:id')
-   .put()
-   .delete()
+   .route('/:id')
+   .put(editIncome)
+   .delete(deleteIncome)
 
 
 
