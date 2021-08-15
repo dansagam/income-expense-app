@@ -8,6 +8,7 @@ import { incomeSelectState } from '../context/IncomeReducer'
 const TopIncomeExpenseTop = () => {
     const expenseTransactions = useSelector(expenseSelectState)
     const incomeTransactions = useSelector(incomeSelectState)
+    console.log(incomeTransactions)
     const iteratedAmount = incomeTransactions.map(incomeTransaction =>(incomeTransaction.amount))
     const totalIncome = iteratedAmount.reduce((acc, item) => (acc +=item), 0).toFixed(2)
     const totalExpenseAmount = expenseTransactions.map(expenseTransaction => (expenseTransaction.amount))
