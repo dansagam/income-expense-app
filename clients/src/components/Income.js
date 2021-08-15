@@ -2,7 +2,7 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, } from 'react-redux'
-import { deleteIncometransaction, incomeEditStatus } from '../context/IncomeReducer'
+import { deleteIncomeTransaction, incomeEditStatus } from '../context/IncomeReducer'
 
 const Income = (props) => {
     const dispatch = useDispatch()
@@ -18,7 +18,7 @@ const Income = (props) => {
                         }>
                             <FontAwesomeIcon  icon=/**"fa-solid fa-square-pen"*/{faEdit} />
                     </span>
-                    <span className="remove-button" onClick={()=> dispatch(deleteIncometransaction(props.incomeTransaction.id))}>
+                    <span className="remove-button" onClick={()=> dispatch(deleteIncomeTransaction(props.incomeTransaction.id))}>
                         <FontAwesomeIcon icon={faTrash} />
                     </span>
                 </div>
