@@ -30,8 +30,8 @@ export const addExpense = async (req, res, next) => {
 
 export const deleteExpense = async (req, res, next) =>{
    try {
-      const expense = Expense.findByIdAndRemove(req.params.id)
-      return res.status(200).json({
+      const expense = await Expense.findByIdAndRemove(req.params.id)
+      return res.status(201).json({
          success: true,
          data: {}
       })
@@ -43,10 +43,10 @@ export const deleteExpense = async (req, res, next) =>{
 }
 export const editExpense = async (req, res, next) =>{
    try {
-      const expense = Expense.findByIdAndUpdate(req.params.id, req.body, {new: true})
-      return res.status(200).json({
+      const expense = await Expense.findByIdAndUpdate(req.params.id, req.body, {new: true})
+      return res.status(201).json({
            success: true,
-           data: item
+           data: expense
       })
    } catch (err) {
       return res.status(400).json({ message: err.message }); 
