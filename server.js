@@ -4,6 +4,7 @@ import connectDB from './config/seedDB.js'
 import morgan from 'morgan'
 import expenseRoutes from './routes/expenseRoutes.js'
 import incomeRoutes from './routes/incomeRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use(express.static('clients/build'))
 
 app.use('/api/expenses', expenseRoutes)
 app.use('/api/incomes', incomeRoutes)
+app.use('/api/users', userRoutes)
 
 
 const PORT = process.env.PORT || 5000
