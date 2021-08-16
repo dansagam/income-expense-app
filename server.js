@@ -31,6 +31,5 @@ const PORT = process.env.PORT || 5000
 
 app.listen(
     PORT, () => 
-    console.log(`MERN shopping app 
-        ${process.env.NODE_ENV} listening on port ${PORT} 🔥 !` )
+    console.log(`Budget income app  ${process.env.NODE_ENV} listening on port ${PORT} 🔥 !` )
 )
