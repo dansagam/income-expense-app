@@ -14,11 +14,11 @@ const ExpenseList = () => {
             {expenseTransactions.map(expenseTransaction => (
                 <>
                     {!expenseStatus ?
-                        <Expense key={expenseTransaction.id} expenseTransaction ={expenseTransaction} onSetTargetid ={setTargetid} />
+                        <Expense key={expenseTransaction._id} expenseTransaction ={expenseTransaction} onSetTargetid ={setTargetid} />
                     
-                    : expenseStatus && (targetid === expenseTransaction.id) 
+                    : expenseStatus && (targetid === expenseTransaction._id) 
                         ? <EditExpenseForm expenseTransaction ={expenseTransaction} />
-                    : <Expense key={expenseTransaction.id} expenseTransaction ={expenseTransaction}  onSetTargetid ={setTargetid}/>
+                    : <Expense key={expenseTransaction._id} expenseTransaction ={expenseTransaction}  onSetTargetid ={setTargetid}/>
                     }
                 </>
             ))}
