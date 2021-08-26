@@ -1,5 +1,6 @@
 import express from "express";
 import { addIncome, deleteIncome, editIncome, getIncomes } from "../controllers/incomeControllers.js";
+import { authService } from "../middlewares/authMiddlewares.js";
 
 const router = express.Router()
 
@@ -7,12 +8,12 @@ const router = express.Router()
 router
    .route('/')
    .get(getIncomes)
-   .post(addIncome)
+   .post(authService, addIncome)
 
 router
    .route('/:id')
-   .put(editIncome)
-   .delete(deleteIncome)
+   .put(authService, editIncome)
+   .delete(authService, deleteIncome)
 
 
 
