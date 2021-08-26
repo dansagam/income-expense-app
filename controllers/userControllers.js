@@ -5,7 +5,7 @@ import generateToken from '../utils/generateToken.js'
 
 /*
     @route post api/user
-    @desc register and get a ogin token session
+    @desc register and get a login token session
     @access public
 */
 const registerUser = async (req, res, next) =>{
@@ -29,7 +29,6 @@ const registerUser = async (req, res, next) =>{
             _id: user._id,
             name: user.name,
             email: user.email,
-            isAdmin: user.isAdmin,
             token: generateToken(user._id),
    
          })
@@ -87,12 +86,16 @@ const authUserLogin = async ( req, res, next) =>{
 const getUsers = async (req, res, next) => {
    try {
       const user = await User.find({})
-      res.json(user)
+      if (user) {
+         res.json(user)
+      }else{
+         res.status(401)
+         throw new Error('User not found')
+      }
       
    } catch (error) {
-      res.status(404).json({
-         msg: 'User not found'
-      })
+      res.status(400)
+      next(error)
       
    }
 }
@@ -120,10 +123,17 @@ const getUserProfile = async (req, res, next) =>{
 const updateUserProfile = async (req, res, next) =>{
    try {
       const user = await User.findById(req.user._id)
+      if(!user){
+         res.status(404)
+         throw new Error('User not found')
+      }
       user.name = req.body.name || user.name
       user.email = req.body.email || user.email
       if (req.body.password) {
          user.password = req.body.password
+      }else{
+         res.status(401)
+         throw new Error('invalid credential')
       }
       const updatedUser = await user.save()
 
@@ -134,8 +144,9 @@ const updateUserProfile = async (req, res, next) =>{
          token: generateToken(updatedUser._id),
       })
    } catch (error) {
-      res.status(404)
-      throw new Error('User not found')
+      // res.status(404)
+      // throw new Error('User not found')
+      next(error)
    }
 }
 
