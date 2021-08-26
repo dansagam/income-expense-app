@@ -2,6 +2,7 @@ import express from 'express'
 import { config } from 'dotenv'
 import connectDB from './config/seedDB.js'
 import morgan from 'morgan'
+import { errorHandler } from './middlewares/errorMiddlewares.js'
 import expenseRoutes from './routes/expenseRoutes.js'
 import incomeRoutes from './routes/incomeRoutes.js'
 import userRoutes from './routes/userRoutes.js'
@@ -21,11 +22,11 @@ if(process.env.NODE_ENV === 'development') {
 if(process.env.NODE_ENV === 'production'){
 app.use(express.static('clients/build'))
 }
-
 app.use('/api/expenses', expenseRoutes)
 app.use('/api/incomes', incomeRoutes)
 app.use('/api/users', userRoutes)
 
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
