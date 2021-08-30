@@ -2,47 +2,79 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
-export const getExpenseTransactions = createAsyncThunk('Expense/getExpenseTransactions', async() =>{
+export const getExpenseTransactions = createAsyncThunk('Expense/getExpenseTransactions', async(arg, {rejectWithValue}) =>{
     try {
         const response = await axios.get('/api/expenses')
-        console.log(response)
+        // console.log(response)
         return response.data.data
     } catch (err) {
-        return err.response.data.err
+        throw rejectWithValue(err.response)
     }
 })
 
-export const addExpenseTransaction = createAsyncThunk('Expense/addExpenseTransaction', async(newExpense) =>{
+export const addExpenseTransaction = createAsyncThunk('Expense/addExpenseTransaction', async(
+    newExpense, {getState, rejectWithValue}) =>{
+    const { 
+       userLogin : {
+          userInfo
+       }
+    } = getState().User
     const config = {
-        header: {
-            'Content-Type': 'application/json'
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${userInfo.token}`
         }
     }
     try {
         const response = await axios.post('/api/expenses', newExpense, config)
         return response.data.data
     } catch (err) {
-        return err.response.data.err
+        throw rejectWithValue(err.response)
         
     }
 })
 
-export const deleteExpenseTransaction = createAsyncThunk('Expense/deleteExpenseTransaction', async(expenseId) =>{
+export const deleteExpenseTransaction = createAsyncThunk('Expense/deleteExpenseTransaction', async(
+    expenseId, {getState, rejectWithValue}) =>{
     try {
+        const { 
+           userLogin : {
+              userInfo
+           }
+        } = getState().User
+        const config = {
+           headers: {
+              Authorization: `Bearer ${userInfo.token}`
+           }
+        }
         // eslint-disable-next-line no-unused-vars
-        const response = await axios.delete(`/api/expenses/${expenseId}`)
+        const response = await axios.delete(`/api/expenses/${expenseId}`, config)
         return expenseId
     } catch (err) {
-        return err.response.data.err
+        throw rejectWithValue(err.response)
     }
 })
 
-export const editExpenseTransaction = createAsyncThunk('Expense/editExpenseTransaction', async({_id, description, amount}) =>{
+export const editExpenseTransaction = createAsyncThunk('Expense/editExpenseTransaction', async(
+    {_id, description, amount}, {getState, rejectWithValue}) =>{
     try {
-        const response = await axios.put(`/api/expenses/${_id}`, { description: description, amount: amount})
+        const { 
+           userLogin : {
+              userInfo
+           }
+        } = getState().User
+        const config = {
+           headers: {
+              Authorization: `Bearer ${userInfo.token}`
+           }
+        }
+
+        const response = await axios.put(`/api/expenses/${_id}`, { 
+            description: description, amount: amount
+        }, config)
         return response.data.data
     } catch (err) {
-        return err.response.data.err
+        return rejectWithValue(err.response)
     }
 })
 
@@ -52,6 +84,11 @@ export const ExpenseReducer =createSlice({
         expenseTransactions : [],
         status: false,
         loading: false,
+        error: {
+           msg: {},
+           status: null,
+           id: null
+        },
 
     },
     reducers: {
@@ -91,7 +128,18 @@ export const ExpenseReducer =createSlice({
                existingExpense.description = description
                existingExpense.amount = amount
             }
-
+        },
+        [editExpenseTransaction.rejected]: (state, action) =>{
+            return {
+                ...state,
+                loading: false,
+                status: false,
+                error: {
+                    msg: action.payload.data,
+                    status: action.payload.status,
+                    id: action.payload.statusText
+                }
+            }
         }
     }
 })
