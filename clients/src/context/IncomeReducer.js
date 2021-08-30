@@ -1,45 +1,87 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export const getIncomeTransactions = createAsyncThunk('Income/getIncomeTrransactions', async () =>{
+export const getIncomeTransactions = createAsyncThunk('Income/getIncomeTrransactions', async (
+    arg, {rejectWithValue}) =>{
     try {
         const response = await axios.get('/api/incomes')
         return response.data.data
     } catch (err) {
-        return err.response.data.err
+        console.log(err.response)
+        throw rejectWithValue(err.response)
     }
 })
-export const addIncomeTransaction = createAsyncThunk('Income/addIncomeTransaction', async(newIncome) =>{
+export const addIncomeTransaction = createAsyncThunk('Income/addIncomeTransaction', async(
+    newIncome, {getState, rejectWithValue}) =>{
+    const { 
+       userLogin : {
+          userInfo
+       }
+    } = getState().User
     
     const config = {
-        header: {
-        'Content-Type': 'application/json'
+        headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
         }
     }
     try {
         const response = await axios.post('/api/incomes', newIncome, config)
         return response.data.data
     } catch (err) {
-        return err.response.data.err
+        console.log(err.response)
+        throw rejectWithValue(err.response)
     }
 })
 
-export const deleteIncomeTransaction = createAsyncThunk('Income/deleteIncomeTransaction', async(transactionId) =>{
+export const deleteIncomeTransaction = createAsyncThunk('Income/deleteIncomeTransaction', async(
+    transactionId,{getState, rejectWithValue}) =>{
     try {
+        const { 
+           userLogin : {
+              userInfo
+           }
+        } = getState().User
+        
+        const config = {
+            headers: {
+            // 'Content-Type': 'application/json',
+            Authorization: `Bearer ${userInfo.token}`
+            }
+        }
         // eslint-disable-next-line no-unused-vars
-        const response = await axios.delete(`/api/incomes/${transactionId}`)
+        const response = await axios.delete(`/api/incomes/${transactionId}`, config)
         return transactionId
     } catch (err) {
-        return err.response.data.err
+        console.log(err.response)
+        throw rejectWithValue(err.response)
     }
 })
 
-export const editIncomeTransaction = createAsyncThunk('Income/editIncomeTransaction', async({_id, description, amount}) =>{
+export const editIncomeTransaction = createAsyncThunk('Income/editIncomeTransaction', async(
+    {_id, description, amount}, {getState, rejectWithValue}) =>{
+        console.log({_id, description, amount})
     try {
-        const response = await axios.put(`/api/incomes/${_id}`, {description: description, amount: amount})
+        const { 
+           userLogin : {
+              userInfo
+           }
+        } = getState().User
+        
+        const config = {
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${userInfo.token}`
+            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMWE1ZWE2MzQzOWFlNmZhYzRkMTc0YyIsImlhdCI6MTYzMDMzMTgxNiwiZXhwIjoxNjMyOTIzODE2fQ.Ey7DTAdDEA_5cH1d0lbmE2f5Cs8GnGahkNvVAJApfFE`
+            }
+        }
+        const response = await axios.put(`/api/incomes/${_id}`, {
+            description: description, amount: amount
+        }, config)
         return response.data.data
     } catch (err) {
-        return err.response.data.err     
+        console.log(err.response)
+        return rejectWithValue(err.response)  
     }
 })
 
@@ -51,6 +93,11 @@ export const IncomeReducer = createSlice({
         incomeTransactions:[],
         status: false,
         loading: false,
+        error: {
+           msg: {},
+           status: null,
+           id: null
+        },
     },
     reducers: {
         incomeEditStatus: (state, action)=>{
@@ -90,7 +137,18 @@ export const IncomeReducer = createSlice({
                existingIncome.description = description
                existingIncome.amount = amount
             }
-
+        },
+        [editIncomeTransaction.rejected]: (state, action) =>{
+            return {
+                ...state,
+                loading: false,
+                status: false,
+                // error: {
+                //     msg: action.payload.data,
+                //     status: action.payload.status,
+                //     id: action.payload.statusText
+                // }
+            }
         }
     }
 })
