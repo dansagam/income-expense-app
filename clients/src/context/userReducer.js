@@ -24,7 +24,7 @@ export const registerUser = createAsyncThunk('users/registerUser', async({name, 
 
       return data
    } catch (err) {
-      rejectWithValue(err.response)
+      throw rejectWithValue(err.response)
    }
 })
 
@@ -47,7 +47,7 @@ export const loginUser = createAsyncThunk('users/loginUser',
          return data
       } catch (err) {
          // rejectWithValue(err.response ? err.response.message : err.response)
-         rejectWithValue(err.response)
+         throw rejectWithValue(err.response)
       }
 })
 
@@ -71,7 +71,7 @@ export const getUserProfile = createAsyncThunk('users/getUserProfile',
       // })
       return data
    } catch (err) {
-      rejectWithValue(err.response)
+      throw rejectWithValue(err.response)
    }
 })
 
@@ -99,7 +99,7 @@ export const updateUserProfile = createAsyncThunk('users/updateUserProfile',
 
          return data
       } catch (err) {
-         rejectWithValue(err.response)
+         throw rejectWithValue(err.response)
       }
 })
 
@@ -107,6 +107,7 @@ export const updateUserProfile = createAsyncThunk('users/updateUserProfile',
 export const userReducer = createSlice({
    name: 'users',
    initialState: {
+      users: {},
       userLogin: { 
          userInfo: userInfoFromStorage 
       },
@@ -123,31 +124,130 @@ export const userReducer = createSlice({
    },
    extraReducers: {
       [registerUser.pending]: (state, action) =>{
+         return{
+            ...state,
+            isLoading: true,
+         }
 
       },
       [registerUser.fulfilled]: (state, action) =>{
+         return {
+            ...state,
+            ...action.payload,
+            isLoading: false,
+            isAuthenticated: true,
+            userLogin: {
+               userInfo: action.payload
+            }
+         }
 
       },
       [registerUser.rejected]: (state, action) =>{
+         // localStorage.removeItem('userInfo')
+         return {
+            ...state,
+            isLoading: false,
+            isAuthenticated: false,
+            userLogin :{
+               userInfo: null
+            },
+            error: {
+               msg: action.payload.data.msg,
+               status: action.payload.status,
+               id: action.payload.statusText
+            }
+         }
 
       },
       [loginUser.pending]: (state, action) =>{
+         return {
+            ...state,
+            isLoading: true,
+         }
 
       },
       [loginUser.fulfilled]: (state, action) =>{
-
+         return{
+            ...state,
+            ...action.payload,
+            isLoading: false,
+            isAuthenticated: true,
+            userLogin: {
+               userInfo: action.payload
+            }
+         }
       },
       [loginUser.rejected]: (state, action) =>{
+         return {
+            ...state,
+            isLoading: false,
+            isAuthenticated: false,
+            userLogin :{
+               userInfo: null
+            },
+            error: {
+               msg: action.payload.data.msg,
+               status: action.payload.status,
+               id: action.payload.statusText
+            }
+         }
+      },
+      [getUserProfile.pending]: (state, action) =>{
+         return {
+            ...state,
+            isLoading: true
+         }
 
       },
       [getUserProfile.fulfilled]: (state, action) =>{
+         return{
+            ...state,
+            isLoading: false,
+            users: action.payload
+         }
 
       },
       [getUserProfile.rejected]: (state, action) =>{
+         return {
+            ...state,
+            isLoading: false,
+            error: {
+               msg: action.payload.data.msg,
+               status: action.payload.status,
+               id: action.payload.statusText
+            }
+         }
+      },
+      [updateUserProfile.pending]: (state, action) =>{
+         return{
+            ...state,
+            isLoading: true
+         }
 
       },
       [updateUserProfile.fulfilled]: (state, action) =>{
-         
+         return{
+            ...state,
+            isAuthenticated: true,
+            isLoading: false,
+            userLogin: {
+               userInfo: action.payload
+            }
+
+         }
+
+      },
+      [updateUserProfile.rejected]: (state, action) =>{
+         return {
+            ...state,
+            isLoading: false,
+            error: {
+               msg: action.payload.data.msg,
+               status: action.payload.status,
+               id: action.payload.statusText
+            }
+         }
+
       }
    }
 })
