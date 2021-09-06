@@ -7,29 +7,29 @@ export const getIncomeTransactions = createAsyncThunk('Income/getIncomeTrransact
         const response = await axios.get('/api/incomes')
         return response.data.data
     } catch (err) {
-        console.log(err.response)
+        // console.log(err.response)
         throw rejectWithValue(err.response)
     }
 })
 export const addIncomeTransaction = createAsyncThunk('Income/addIncomeTransaction', async(
     newIncome, {getState, rejectWithValue}) =>{
-    const { 
-       userLogin : {
-          userInfo
-       }
-    } = getState().User
-    
-    const config = {
-        headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`
-        }
-    }
     try {
+        const { 
+           userLogin : {
+              userInfo
+           }
+        } = getState().User
+        
+        const config = {
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${userInfo.token}`
+            }
+        }
         const response = await axios.post('/api/incomes', newIncome, config)
         return response.data.data
     } catch (err) {
-        console.log(err.response)
+        // console.log(err.response)
         throw rejectWithValue(err.response)
     }
 })
@@ -53,7 +53,7 @@ export const deleteIncomeTransaction = createAsyncThunk('Income/deleteIncomeTran
         const response = await axios.delete(`/api/incomes/${transactionId}`, config)
         return transactionId
     } catch (err) {
-        console.log(err.response)
+        // console.log(err.response)
         throw rejectWithValue(err.response)
     }
 })
@@ -117,6 +117,19 @@ export const IncomeReducer = createSlice({
                 ...state,
                 incomeTransactions: action.payload
             }
+        }, 
+        [getIncomeTransactions.rejected]: (state, action) =>{
+            return {
+                ...state,
+                loading: false,
+                status: false,
+                error: {
+                    msg: action.payload.data,
+                    status: action.payload.status,
+                    id: action.payload.statusText
+                }
+            }
+
         },
         [addIncomeTransaction.fulfilled]: (state, action) =>{
             return {
@@ -124,11 +137,37 @@ export const IncomeReducer = createSlice({
                 incomeTransactions: [action.payload, ...state.incomeTransactions]
             }
         },
+        [addIncomeTransaction.rejected]: (state, action) =>{
+            return {
+                ...state,
+                loading: false,
+                status: false,
+                error: {
+                    msg: action.payload.data,
+                    status: action.payload.status,
+                    id: action.payload.statusText
+                }
+            }
+
+        },
         [deleteIncomeTransaction.fulfilled]: (state, action) =>{
             return {
                 ...state,
                 incomeTransactions: state.incomeTransactions.filter(incomeTransaction => incomeTransaction._id !== action.payload)
             }
+        },
+        [deleteIncomeTransaction.rejected]: (state, action) =>{
+            return {
+                ...state,
+                loading: false,
+                status: false,
+                error: {
+                    msg: action.payload.data,
+                    status: action.payload.status,
+                    id: action.payload.statusText
+                }
+            }
+
         },
         [editIncomeTransaction.fulfilled]: (state, action) =>{
             const { _id, description, amount} = action.payload
@@ -143,11 +182,11 @@ export const IncomeReducer = createSlice({
                 ...state,
                 loading: false,
                 status: false,
-                // error: {
-                //     msg: action.payload.data,
-                //     status: action.payload.status,
-                //     id: action.payload.statusText
-                // }
+                error: {
+                    msg: action.payload.data,
+                    status: action.payload.status,
+                    id: action.payload.statusText
+                }
             }
         }
     }

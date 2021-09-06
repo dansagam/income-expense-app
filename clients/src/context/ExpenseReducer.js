@@ -14,18 +14,18 @@ export const getExpenseTransactions = createAsyncThunk('Expense/getExpenseTransa
 
 export const addExpenseTransaction = createAsyncThunk('Expense/addExpenseTransaction', async(
     newExpense, {getState, rejectWithValue}) =>{
-    const { 
-       userLogin : {
-          userInfo
-       }
-    } = getState().User
-    const config = {
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${userInfo.token}`
-        }
-    }
     try {
+        const { 
+           userLogin : {
+              userInfo
+           }
+        } = getState().User
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
         const response = await axios.post('/api/expenses', newExpense, config)
         return response.data.data
     } catch (err) {
@@ -109,16 +109,52 @@ export const ExpenseReducer =createSlice({
                 expenseTransactions: action.payload
             }
         },
+        [getExpenseTransactions.rejected]: (state, action) => {
+            return {
+                ...state,
+                loading: false,
+                status: false,
+                error: {
+                    msg: action.payload.data,
+                    status: action.payload.status,
+                    id: action.payload.statusText
+                }
+            }
+        },
         [addExpenseTransaction.fulfilled]: (state, action) => {
             return {
                 ...state,
                 expenseTransactions: [action.payload, ...state.expenseTransactions]
             }
         },
+        [addExpenseTransaction.rejected]: (state, action) => {
+            return {
+                ...state,
+                loading: false,
+                status: false,
+                error: {
+                    msg: action.payload.data,
+                    status: action.payload.status,
+                    id: action.payload.statusText
+                }
+            }
+        },
         [deleteExpenseTransaction.fulfilled]: (state, action) =>{
             return {
                 ...state,
                 expenseTransactions: state.expenseTransactions.filter(expenseTransaction => expenseTransaction.id !==action.payload)
+            }
+        },
+        [deleteExpenseTransaction.rejected]: (state, action) => {
+            return {
+                ...state,
+                loading: false,
+                status: false,
+                error: {
+                    msg: action.payload.data,
+                    status: action.payload.status,
+                    id: action.payload.statusText
+                }
             }
         },
         [editExpenseTransaction.fulfilled]: (state, action) =>{
