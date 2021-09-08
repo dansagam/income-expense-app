@@ -36,7 +36,7 @@
 .income-expense-display{
     font-size: 2rem;
     font-weight: 300;
-    letter-spacing: 2px;
+    /* letter-spacing: 2px; */
     text-align: center;
 }
 .income-stack-display, .expense-stack-display{
@@ -79,7 +79,7 @@
 .input-income-expense-field{
     padding: 20px;
     background-color: #f7f7f7;
-    letter-spacing: 1.2rem;
+    /* letter-spacing: 1.2rem; */
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -96,12 +96,12 @@
 #income-expense-option{
     padding: 10px 5px;
     margin: 0 5px;
-    letter-spacing: .2rem;
+    /* letter-spacing: .2rem; */
 }
 .detail-input-text{
     padding: 10px 5px;
     margin: 0 5px;
-    letter-spacing: .2rem;
+    /* letter-spacing: .2rem; */
     width: 540px;
     border-radius: 5px;
     color: rgb(124, 123, 124);
@@ -109,7 +109,7 @@
 .input-detail-value{
     padding: 10px 5px;
     margin: 0 5px;    
-    letter-spacing: .2rem;
+    /* letter-spacing: .2rem; */
     width: 80px;
 }
 .income-expense-list-container{
@@ -136,12 +136,13 @@ h2.income-header, h2.expense-header {
     border-bottom: 1px solid #28B9B5;
 }
 .income-list-container, .expense-list-container{
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    border-radius: 5px;
     margin-top: 10px;
-    padding: 15px;
+    padding: 5px;
 }
 .item-field {
-    border: 1px solid black;
+    border: 1px solid inherit;
     /* display: flex;
     flex-direction: row;
     justify-content: space-between; */
@@ -150,6 +151,18 @@ h2.income-header, h2.expense-header {
     align-items: center;
     padding: 10px;
     margin: 5px 8px;
+    border-radius: 5px;
+}
+
+.item-field:nth-of-type(2n){
+    background-color: #8f62f8;
+    color: #fa9a97;
+    box-shadow:  3px 2px 2px 1px #c99df8,  -3px -2px 2px 1px #bc99e2;
+}
+.item-field:nth-of-type(2n+1){
+    background-color: #8e5aac;
+    color: #333035;
+    box-shadow:  3px 2px 2px 1px #dbbcfc, -3px -2px 2px 1px #dbbcfc;
 }
 .item-value-container {
     /* display: flex;
@@ -169,8 +182,8 @@ h2.income-header, h2.expense-header {
 .delete-edit-button{
     font-size: 1.5rem;
     margin-left: 8px;
-    background-color: #fff;
-    height: 20px;
+    background-color: inherit;
+    /* height: 20px; */
     text-align: center;
     border: none;
     display: grid;
@@ -179,7 +192,7 @@ h2.income-header, h2.expense-header {
     opacity: 0;
     visibility: visible;
     /* gap: 8px; */
-    transition: 0.2s linear;
+    transition: 0.4s linear;
     transition-property: transform opacity;
 }
 .item-field:hover .delete-edit-button{

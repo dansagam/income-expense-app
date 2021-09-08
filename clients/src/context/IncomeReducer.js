@@ -23,7 +23,9 @@ export const addIncomeTransaction = createAsyncThunk('Income/addIncomeTransactio
         const config = {
             headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${userInfo.token}`
+            // Authorization: `Bearer ${userInfo.token}`
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMWE1ZWE2MzQzOWFlNmZhYzRkMTc0YyIsImlhdCI6MTYzMDMzMTgxNiwiZXhwIjoxNjMyOTIzODE2fQ.Ey7DTAdDEA_5cH1d0lbmE2f5Cs8GnGahkNvVAJApfFE`
+            
             }
         }
         const response = await axios.post('/api/incomes', newIncome, config)

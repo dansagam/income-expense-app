@@ -14,9 +14,14 @@ const Expense = (props) => {
                 <div className={`delete-edit-button`}>
                     <span onClick={() => {
                         dispatch(expenseEditStatus(true))
-                        props.onSetTargetid(props.expenseTransaction._id)}}><FontAwesomeIcon icon={faEdit} /></span>
-                    <span className="remove-button" onClick={()=> dispatch(deleteExpenseTransaction(props.expenseTransaction._id))}>
-                        <FontAwesomeIcon icon={faTrash} />
+                        props.onSetTargetid(props.expenseTransaction._id)}}
+                    >
+                        <FontAwesomeIcon icon={faEdit} size="sm" />
+                    </span>
+                    <span className="remove-button" 
+                        onClick={()=> dispatch(deleteExpenseTransaction(props.expenseTransaction._id))}
+                    >
+                        <FontAwesomeIcon icon={faTrash} size="sm"/>
                     </span>
                 </div>
             </div>

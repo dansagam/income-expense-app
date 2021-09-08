@@ -16,10 +16,12 @@ const Income = (props) => {
                         dispatch(incomeEditStatus(true))
                         props.onSetTargetid(props.incomeTransaction._id)}
                         }>
-                            <FontAwesomeIcon  icon={faEdit} />
+                            <FontAwesomeIcon  icon={faEdit}  size="sm"/>
                     </span>
-                    <span className="remove-button" onClick={()=> dispatch(deleteIncomeTransaction(props.incomeTransaction._id))}>
-                        <FontAwesomeIcon icon={faTrash} />
+                    <span className="remove-button" 
+                        onClick={()=> dispatch(deleteIncomeTransaction(props.incomeTransaction._id))}
+                    >
+                        <FontAwesomeIcon icon={faTrash} size="sm"/>
                     </span>
                 </div>
             </div>
