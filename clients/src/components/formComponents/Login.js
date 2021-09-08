@@ -85,7 +85,7 @@ const Login = () => {
                      style={{marginTop: '1.2rem'}} 
                      onClick={onSubmit}
                   >
-                     Register
+                     Login
                   </Button>
                </Form>
             </Modal.Body>

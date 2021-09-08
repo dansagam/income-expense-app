@@ -124,7 +124,10 @@ export const userReducer = createSlice({
          localStorage.removeItem('userInfo')
          return {
             ...state,
-            users: {},
+            users: null,
+            userLogin: { 
+               userInfo: userInfoFromStorage 
+            },
             isAuthenticated: false,
             isLoading: false,
             error: {

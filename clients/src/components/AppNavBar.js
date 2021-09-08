@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Fragment,} from 'react'
 import {Navbar, Container, Nav, NavItem,  } from 'react-bootstrap'
 import Login from './formComponents/Login'
 import Logout from './formComponents/Logout'
@@ -14,6 +14,11 @@ const AppNavBar = () => {
                userInfo 
             }
          } = useSelector(state => state.User)
+   // useEffect(() => {
+   //    if(!isAuthenticated){
+   //       return {userInfo: false}
+   //    }
+   // }, [isAuthenticated])
    const regLink = (
       <Fragment>
          <NavItem>
