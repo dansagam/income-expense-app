@@ -142,7 +142,7 @@ export const ExpenseReducer =createSlice({
         [deleteExpenseTransaction.fulfilled]: (state, action) =>{
             return {
                 ...state,
-                expenseTransactions: state.expenseTransactions.filter(expenseTransaction => expenseTransaction.id !==action.payload)
+                expenseTransactions: state.expenseTransactions.filter(expenseTransaction => expenseTransaction._id !==action.payload)
             }
         },
         [deleteExpenseTransaction.rejected]: (state, action) => {

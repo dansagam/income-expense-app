@@ -157,12 +157,12 @@ h2.income-header, h2.expense-header {
 .item-field:nth-of-type(2n){
     background-color: #8f62f8;
     color: #fa9a97;
-    box-shadow:  3px 2px 2px 1px #c99df8,  -3px -2px 2px 1px #bc99e2;
+    box-shadow:  3px 2px 2px 1px #3f3e3f,  -3px -2px 2px 1px #676668;
 }
 .item-field:nth-of-type(2n+1){
     background-color: #8e5aac;
     color: #333035;
-    box-shadow:  3px 2px 2px 1px #dbbcfc, -3px -2px 2px 1px #dbbcfc;
+    box-shadow:  3px 2px 2px 1px #505050, -3px -2px 2px 1px #686768;
 }
 .item-value-container {
     /* display: flex;
@@ -204,5 +204,10 @@ h2.income-header, h2.expense-header {
     opacity: 0;
     transition: all 250ms linear 2s; /* the last value defines transition-delay */
   }
+.removal-row::before {
+    opacity: 0;
+    transition: all 250ms linear 2s; /* the last value defines transition-delay */
+    transition-property: transform opacity;
 
+}
 

@@ -6,7 +6,6 @@ config({path: '../config/config.env'})
 
 
 const authService = async (req, res, next) =>{
-   console.log(req.headers.authorization)
    try {
       let token
       if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){

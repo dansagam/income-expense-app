@@ -120,7 +120,31 @@ export const userReducer = createSlice({
       }
    },
    reducers: {
-
+      logoutSucess: (state, action) =>{
+         localStorage.removeItem('userInfo')
+         return {
+            ...state,
+            users: {},
+            isAuthenticated: false,
+            isLoading: false,
+            error: {
+               msg: {},
+               status: null,
+               id: null
+            }
+         }
+      },
+      clearErrors: (state, action) =>{
+         // console.log(state)
+         return{
+            ...state,
+            error: {
+               msg: {},
+               status: null,
+               id: null
+            }
+         }
+      },
    },
    extraReducers: {
       [registerUser.pending]: (state, action) =>{
@@ -252,6 +276,8 @@ export const userReducer = createSlice({
    }
 })
 
+
+export const { clearErrors, logoutSucess } = userReducer.actions
 
 
 
