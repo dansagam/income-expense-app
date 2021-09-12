@@ -51,18 +51,20 @@ export const deleteIncomeTransaction = createAsyncThunk('Income/deleteIncomeTran
             Authorization: `Bearer ${userInfo.token}`
             }
         }
-        // eslint-disable-next-line no-unused-vars
-        const response = await axios.delete(`/api/incomes/${transactionId}`, config)
-        return transactionId
+        if(userInfo){
+            // eslint-disable-next-line no-unused-vars
+            const response = await axios.delete(`/api/incomes/${transactionId}`, config)
+            return transactionId
+
+        } 
     } catch (err) {
         // console.log(err.response)
-        throw rejectWithValue(err.response)
+        return rejectWithValue(err.response)
     }
 })
 
 export const editIncomeTransaction = createAsyncThunk('Income/editIncomeTransaction', async(
     {_id, description, amount}, {getState, rejectWithValue}) =>{
-        console.log({_id, description, amount})
     try {
         const { 
            userLogin : {
@@ -72,9 +74,8 @@ export const editIncomeTransaction = createAsyncThunk('Income/editIncomeTransact
         
         const config = {
             headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${userInfo.token}`
-            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMWE1ZWE2MzQzOWFlNmZhYzRkMTc0YyIsImlhdCI6MTYzMDMzMTgxNiwiZXhwIjoxNjMyOTIzODE2fQ.Ey7DTAdDEA_5cH1d0lbmE2f5Cs8GnGahkNvVAJApfFE`
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
             }
         }
         const response = await axios.put(`/api/incomes/${_id}`, {
