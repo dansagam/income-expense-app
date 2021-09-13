@@ -26,6 +26,7 @@ export const addExpenseTransaction = createAsyncThunk('Expense/addExpenseTransac
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
+        console.log(config)
         const response = await axios.post('/api/expenses', newExpense, config)
         return response.data.data
     } catch (err) {
